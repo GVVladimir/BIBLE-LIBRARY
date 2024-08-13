@@ -1,0 +1,58 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="style.css" />
+    <title>Document</title>
+  </head>
+  <body class="container">
+    <header class="haed">
+      <h1>БИБЛИОТЕКА</h1>
+    </header>
+    <main>
+      <section>
+        <p>
+          Название книги
+          <input class="inpName" type="text" placeholder="Название книги" />
+        </p>
+        <p>Автор <input class="inpAuthor" type="text" placeholder="Автор" /></p>
+        <p>Жанр <input class="inpGenre" type="text" placeholder="Жанр" /></p>
+        <p>
+          Год издания <input class="inpYear" type="number" placeholder="Год" />
+        </p>
+      </section>
+
+      <section>
+        <button id="btn">добавить книгу</button>         
+        <button id="saveBtn">Сохранить </button>
+        <!-- <button id="delBtn">удалить книгу</button> -->
+      </section>
+
+      <section class="description">
+        <ul>
+          <ol>
+            <li>Название книги</li>
+          </ol>
+          <ol>
+            <!-- <li>Автор</li> -->
+          </ol>
+          <ol>
+            <li>Жанр</li>
+          </ol>
+          <ol>
+            <li>Год издания</li>
+          </ol>
+          <ol>
+            <li>Прочитана</li>
+          </ol>
+        </ul>
+      </section>
+      <section>
+        <ul id="books"></ul>
+      </section>
+    </main>
+    <script type="module" src="main.js"></script>
+  </body>
+</html>
+ 
