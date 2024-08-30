@@ -14,20 +14,21 @@ const inpYear = document.querySelector(".inpYear");
 let books = JSON.parse(localStorage.getItem("library")) || [];
 
 if (books.length > 0) {
-  const innerHTML = books.reduce((acc, item) => {
-    return (
-      acc +
-      `<ul>
-          <li>${item.name}</li>
-          <li>${item.author}</li>
-          <li>${item.genre}</li>
-          <li>${item.yaer}</li>
-          <li><input id="checkbox" type="checkbox" name="" id=""></li>   
-          <button id="delBtn">удалить книгу</button>
-          </ul>`
-    );
-  }, "");
-  booksCont.innerHTML = innerHTML;
+  addBooks();
+  // const innerHTML = books.reduce((acc, item, index) => {
+  //   return (
+  //     acc +
+  //     `<ul>
+  //         <li>${item.name}</li>
+  //         <li>${item.author}</li>
+  //         <li>${item.genre}</li>
+  //         <li>${item.yaer}</li>
+  //         <li><input id="checkbox" type="checkbox" name="" id=""></li>
+  //         <button onClick='deletTask(${index})'class='delBtn' id="delBtn" data-action='delete'>удалить книгу</button>
+  //         </ul>`
+  //   );
+  // }, "");
+  // booksCont.innerHTML = innerHTML;
 }
 {
   /* <li><input id="checkbox" type="checkbox" name="" id=""></li> */
@@ -41,7 +42,7 @@ btn.addEventListener("click", () => {
     dataInpName === "" ||
     dataInpGenre === "" ||
     dataInpAuthor == "" ||
-    dataInpYear === isNaN
+    dataInpYear === ""
   ) {
     alert("Введите данные");
   } else {
@@ -55,21 +56,22 @@ btn.addEventListener("click", () => {
   }
   const ul = document.createElement("ul");
 
-  const innerHTML = books.reduce((acc, item) => {
-    return (
-      acc +
-      `<ul>
-        <li>${item.name}</li>
-        <li>${item.author}</li>
-        <li>${item.genre}</li>
-        <li>${item.yaer}</li>
-        <li><input id="checkbox" type="checkbox" name="" id=""></li>   
-        <button id="delBtn">удалить книгу</button>         
-        </ul>`
-    );
-  }, "");
+  addBooks();
+  // const innerHTML = books.reduce((acc, item) => {
+  //   return (
+  //     acc +
+  //     `<ul>
+  //       <li>${item.name}</li>
+  //       <li>${item.author}</li>
+  //       <li>${item.genre}</li>
+  //       <li>${item.yaer}</li>
+  //       <li><input id="checkbox" type="checkbox" name="" id=""></li>
+  //       <button onClick='deletTask(${index})' class='delBtn' id="delBtn" data-action='delete'>удалить книгу</button>
+  //       </ul>`
+  //   );
+  // }, "");
 
-  booksCont.innerHTML = innerHTML;
+  // booksCont.innerHTML = innerHTML;
 
   inpName.value = "";
   inpAuthor.value = "";
@@ -79,10 +81,33 @@ btn.addEventListener("click", () => {
 
 saveBtn.onclick = function () {
   localStorage.setItem("library", JSON.stringify(books));
+  addBooks();
 };
-const delBtn = document.querySelector("#delBtn");
 
-delBtn.addEventListener("click", () => {
-  console.log(delBtn);
-  localStorage.removeItem("library", JSON.stringify(books));
-});
+//   localStorage.removeItem("library", JSON.stringify(books));
+
+function deletTask(index) {
+  books.splice(index, 1);
+  localStorage.setItem("library", JSON.stringify(books));
+  addBooks();
+}
+
+const book = books[index]
+
+
+function addBooks() {
+  const innerHTML = books.reduce((acc, item, index) => {
+    return (
+      acc +
+      `<ul>
+          <li>${item.name}</li>
+          <li>${item.author}</li>
+          <li>${item.genre}</li>
+          <li>${item.year}</li>            
+          <button onclick='deletTask(${index})'class='delBtn' id="delBtn" data-action='delete'>удалить книгу</button>
+          </ul>`
+    );
+  }, "");
+
+  booksCont.innerHTML = innerHTML;
+}
