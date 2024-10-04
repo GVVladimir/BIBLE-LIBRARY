@@ -4,6 +4,9 @@ const btn = document.querySelector("#btn");
 const saveBtn = document.querySelector("#saveBtn");
 const checkbox = document.querySelector("checkbox");
 const booksCont = document.querySelector("#books");
+const deletBtn = document.querySelector("#deletBtn");
+const editBtn = document.querySelector(".editBtn");
+// const deletBtn = document.querySelector("DeletBtn");
 // const delBtn = document.querySelector("#delBtn");
 // console.log(delBtn)
 const inpName = document.querySelector(".inpName");
@@ -84,6 +87,12 @@ saveBtn.onclick = function () {
   addBooks();
 };
 
+deletBtn.addEventListener("click", () => {
+  books.length = "";
+  localStorage.setItem("library", JSON.stringify(books));
+  addBooks();
+});
+
 //   localStorage.removeItem("library", JSON.stringify(books));
 
 function deletTask(index) {
@@ -92,8 +101,34 @@ function deletTask(index) {
   addBooks();
 }
 
-const book = books[index]
+function editTask(index) {
+  book = books[index];
+  inpName.value = book.name;
+  inpAuthor.value = book.author;
+  inpGenre.value = book.genre;
+  inpYear.value = book.year;
+  deletTask(index);
+}
 
+// for (let i = 0; i < editBtn.length; i++)
+
+// let editMode = false;
+
+// editBtn.addEventListener("click", () => {
+//   console.log(2);
+// if (editMode) {
+//   this.textContent = "редактировать";
+//   books.removeAttribute("contentEditable");
+// } else {
+//   this.textContent = "сохранить";
+//   books.setAttribute("contentEditable", true);
+//   books.focus();
+// }
+
+// editMode = !editMode;
+// });
+
+// const book = books[index];
 
 function addBooks() {
   const innerHTML = books.reduce((acc, item, index) => {
@@ -105,6 +140,7 @@ function addBooks() {
           <li>${item.genre}</li>
           <li>${item.year}</li>            
           <button onclick='deletTask(${index})'class='delBtn' id="delBtn" data-action='delete'>удалить книгу</button>
+           <button onclick='editTask(${index})' class='editBtn' id="editBtn" data-action='delete'>редактировать</button>
           </ul>`
     );
   }, "");
